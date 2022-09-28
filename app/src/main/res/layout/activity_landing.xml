@@ -9,26 +9,24 @@
 
     <TextView
         android:id="@+id/txtView_user"
-        android:layout_width="414dp"
-        android:layout_height="109dp"
+        android:layout_width="410dp"
+        android:layout_height="60dp"
         android:background="#C6303E97"
-        android:text="SIUUUUUUUUUUUUUUUUUUUUUUUUUUUU"
+        android:lineSpacingExtra="8sp"
+        android:text="SIu"
         android:textAlignment="center"
         android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/my_list"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/my_list"
-        android:layout_width="410dp"
-        android:layout_height="743dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="429dp"
+        android:layout_height="722dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/txtView_user" />
 </androidx.constraintlayout.widget.ConstraintLayout>

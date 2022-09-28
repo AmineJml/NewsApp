@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class LandingActivity extends AppCompatActivity {
     String name;
     ListView my_list;
     Random rand;
+    TextView user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,9 @@ public class LandingActivity extends AppCompatActivity {
 
         rand = new Random();
         my_list = (ListView) findViewById(R.id.my_list);
+        user = (TextView) findViewById(R.id.txtView_user) ;
+
+        user.setText("Welcome" + name);
         populate(5);
     }
     public void populate(int x)

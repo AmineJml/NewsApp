@@ -7,19 +7,18 @@
     tools:context=".popUpActivity">
 
     <TextView
-        android:id="@+id/txtView_name"
-        android:layout_width="414dp"
-        android:layout_height="109dp"
+        android:id="@+id/txtView_user5"
+        android:layout_width="410dp"
+        android:layout_height="60dp"
         android:background="#C6303E97"
-        android:text="SIUUUUUUUUUUUUUUUUUUUUUUUUUUUU"
+        android:lineSpacingExtra="8sp"
+        android:text="SIu"
         android:textAlignment="center"
         android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtView_title"
@@ -31,12 +30,12 @@
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtView_name" />
+        app:layout_constraintTop_toBottomOf="@+id/txtView_user5" />
 
     <TextView
         android:id="@+id/txtView_description"
-        android:layout_width="411dp"
-        android:layout_height="657dp"
+        android:layout_width="407dp"
+        android:layout_height="694dp"
         android:background="#DA5391B1"
         android:text="Description here"
         android:textSize="24sp"
