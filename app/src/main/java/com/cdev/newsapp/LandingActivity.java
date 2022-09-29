@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,11 +36,21 @@ public class LandingActivity extends AppCompatActivity {
         user = (TextView) findViewById(R.id.txtView_user) ;
 
         sharedPref();
-
-
-
-
         populate(5);
+        clickOnList();
+
+
+    }
+
+    public void clickOnList(){
+        my_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedItem = (String) adapterView.getItemAtPosition(i);
+                Toast.makeText(getApplicationContext(), selectedItem, Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
     public void sharedPref()
