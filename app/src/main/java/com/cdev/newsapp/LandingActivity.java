@@ -23,9 +23,12 @@ public class LandingActivity extends AppCompatActivity {
     ListView my_list;
     Random rand;
     TextView user;
+
+
     //clickOnList
     String selectedItem;
 
+    //sharedPref
     SharedPreferences shared;
     SharedPreferences.Editor myEdit;
 
@@ -36,7 +39,7 @@ public class LandingActivity extends AppCompatActivity {
 
         rand = new Random();
         my_list = (ListView) findViewById(R.id.my_list);
-        user = (TextView) findViewById(R.id.txtView_user) ;
+        user = (TextView) findViewById(R.id.txtView_popUp_user) ;
 
         sharedPref();
         populate(5);

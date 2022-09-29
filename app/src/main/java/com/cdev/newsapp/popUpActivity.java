@@ -6,16 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.Random;
 
 public class popUpActivity extends AppCompatActivity {
 
     String name;
     TextView user;
+
 
     SharedPreferences shared;
     SharedPreferences.Editor myEdit;
@@ -24,7 +22,11 @@ public class popUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up);
 
-     //   sharedPref();
+        user = (TextView) findViewById(R.id.txtView_popUp_user);
+
+
+       sharedPref();
+
 
         Intent c = getIntent();
         String key = c.getStringExtra("key");

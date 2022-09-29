@@ -7,7 +7,7 @@
     tools:context=".popUpActivity">
 
     <TextView
-        android:id="@+id/txtView_user5"
+        android:id="@+id/txtView_popUp_user"
         android:layout_width="410dp"
         android:layout_height="60dp"
         android:background="#C6303E97"
@@ -16,32 +16,32 @@
         android:textAlignment="center"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtView_title"
-        android:layout_width="409dp"
-        android:layout_height="84dp"
+        android:id="@+id/txtView_popUp_title"
+        android:layout_width="398dp"
+        android:layout_height="78dp"
         android:background="#1A6080"
         android:text="title here"
         android:textAlignment="center"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtView_user5" />
+        app:layout_constraintTop_toBottomOf="@+id/txtView_popUp_user" />
 
     <TextView
-        android:id="@+id/txtView_description"
-        android:layout_width="407dp"
-        android:layout_height="694dp"
+        android:id="@+id/txtView_popUp_description"
+        android:layout_width="396dp"
+        android:layout_height="646dp"
         android:background="#DA5391B1"
         android:text="Description here"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtView_title" />
+        app:layout_constraintTop_toBottomOf="@+id/txtView_popUp_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
