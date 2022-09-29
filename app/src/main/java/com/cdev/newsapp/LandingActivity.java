@@ -2,11 +2,14 @@ package com.cdev.newsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -18,21 +21,35 @@ public class LandingActivity extends AppCompatActivity {
     Random rand;
     TextView user;
 
+    SharedPreferences shared;
+    SharedPreferences.Editor myEdit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
 
-        Bundle bundle = getIntent().getExtras();
-        String name = bundle.getString("message");
-
         rand = new Random();
         my_list = (ListView) findViewById(R.id.my_list);
         user = (TextView) findViewById(R.id.txtView_user) ;
 
-        user.setText("Welcome" + name);
+        sharedPref();
+
+
+
+
         populate(5);
     }
+
+    public void sharedPref()
+    {
+        shared = this.getSharedPreferences("com.lau.shared", Context.MODE_PRIVATE);
+        myEdit = shared.edit();
+        name = shared.getString("token_a", "");
+        user.setText("Welcome " + name);
+
+    }
+
     public void populate(int x)
     {
         Log.d("inside", "IM INSEDESAFR");
