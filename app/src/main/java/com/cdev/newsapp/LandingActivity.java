@@ -3,6 +3,7 @@ package com.cdev.newsapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,8 @@ public class LandingActivity extends AppCompatActivity {
     ListView my_list;
     Random rand;
     TextView user;
+    //clickOnList
+    String selectedItem;
 
     SharedPreferences shared;
     SharedPreferences.Editor myEdit;
@@ -43,14 +46,25 @@ public class LandingActivity extends AppCompatActivity {
     }
 
     public void clickOnList(){
+        Intent c = new Intent(this, popUpActivity.class);
         my_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedItem = (String) adapterView.getItemAtPosition(i);
+                selectedItem = (String) adapterView.getItemAtPosition(i);
+
+
+
                 Toast.makeText(getApplicationContext(), selectedItem, Toast.LENGTH_LONG).show();
 
+
+                c.putExtra("key", selectedItem + "we made it");
+                startActivity(c);
+
             }
+
         });
+
+
     }
 
     public void sharedPref()
