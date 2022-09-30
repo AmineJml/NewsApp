@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/txtView_popUp_user"
-        android:layout_width="410dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="78dp"
         android:background="#C6303E97"
         android:lineSpacingExtra="8sp"
         android:text="SIu"

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,26 +44,21 @@ public class LandingActivity extends AppCompatActivity {
         user = (TextView) findViewById(R.id.txtView_popUp_user) ;
 
         sharedPref();
-        populate(5);
+       // populate(5);
+       populateTest();
         clickOnList();
 
 
     }
 
     public void clickOnList(){
-        Intent c = new Intent(this, popUpActivity.class);
+        Intent popUp = new Intent(this, popUpActivity.class);
         my_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedItem = (String) adapterView.getItemAtPosition(i);
-
-
-
-                Toast.makeText(getApplicationContext(), selectedItem, Toast.LENGTH_LONG).show();
-
-
-                c.putExtra("key", selectedItem + "we made it");
-                startActivity(c);
+                popUp.putExtra("key", selectedItem + "we made it");
+                startActivity(popUp);
 
             }
 
@@ -77,6 +74,43 @@ public class LandingActivity extends AppCompatActivity {
         name = shared.getString("token_a", "");
         user.setText("Welcome " + name);
 
+    }
+
+    public void populateTest()
+    {
+        try{
+
+            ArrayList<String> news = new ArrayList<String>();
+
+            SQLiteDatabase sql = this.openOrCreateDatabase("newsdb", MODE_PRIVATE, null);
+            sql.execSQL("CREATE Table IF NOT EXISTS students (first_name VARCHAR, last_name VARCHAR)");
+            sql.execSQL("INSERT INTO students(first_name, last_name) VALUES ('John', 'Doe')");
+            sql.execSQL("INSERT INTO students(first_name, last_name) VALUES ('Charbel', 'Daoud')");
+
+            // sql.execSQL("DELETE FROM students where first_name = 'John'");
+            //sql.execSQL("DELETE FROM students where first_name = 'Charbel'");
+            Cursor c = sql.rawQuery("Select * from students", null);
+
+            int fnameIndex = c.getColumnIndex("first_name");
+            int lnameIndex = c.getColumnIndex("last_name");
+            c.moveToFirst();
+
+            while(c!= null){
+                String name = c.getString(fnameIndex) + " " + c.getString(lnameIndex);
+                news.add(name);
+                c.moveToNext();
+                Log.d("key", "i go there");
+
+            }
+            Log.d("i got out", "i go there");
+
+            Log.d("arrayyyy","AA" + String.valueOf(news));
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, news);
+            my_list.setAdapter(adapter);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void populate(int x)

@@ -13,6 +13,8 @@ public class popUpActivity extends AppCompatActivity {
 
     String name;
     TextView user;
+    TextView title;
+    TextView Description;
 
 
     SharedPreferences shared;
@@ -23,6 +25,8 @@ public class popUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pop_up);
 
         user = (TextView) findViewById(R.id.txtView_popUp_user);
+        title = (TextView) findViewById(R.id.txtView_popUp_title);
+        Description = (TextView) findViewById(R.id.txtView_popUp_description);
 
 
        sharedPref();
