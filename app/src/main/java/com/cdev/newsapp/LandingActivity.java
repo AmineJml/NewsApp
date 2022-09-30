@@ -26,6 +26,9 @@ public class LandingActivity extends AppCompatActivity {
     Random rand;
     TextView user;
 
+    //populate
+    ArrayList<String> the_list;
+    ArrayAdapter<String> adapter;
 
     //clickOnList
     String selectedItem;
@@ -33,6 +36,8 @@ public class LandingActivity extends AppCompatActivity {
     //sharedPref
     SharedPreferences shared;
     SharedPreferences.Editor myEdit;
+
+    ArrayList<String> news;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +49,9 @@ public class LandingActivity extends AppCompatActivity {
         user = (TextView) findViewById(R.id.txtView_popUp_user) ;
 
         sharedPref();
-       // populate(5);
-       populateTest();
+        //populate();
+      populateTest();
+        //arL();
         clickOnList();
 
 
@@ -79,55 +85,67 @@ public class LandingActivity extends AppCompatActivity {
     public void populateTest()
     {
         try{
+            //how to insert item only once
+            //how to select items by name
+            //cursor reexplanation
+            my_list = findViewById(R.id.my_list);
 
-            ArrayList<String> news = new ArrayList<String>();
+            the_list = new ArrayList<String>();
+    Log.d("key1", "problem here");
+            SQLiteDatabase newsdb = this.openOrCreateDatabase("newsdb", MODE_PRIVATE, null);
 
-            SQLiteDatabase sql = this.openOrCreateDatabase("newsdb", MODE_PRIVATE, null);
-            sql.execSQL("CREATE Table IF NOT EXISTS students (first_name VARCHAR, last_name VARCHAR)");
-            sql.execSQL("INSERT INTO students(first_name, last_name) VALUES ('John', 'Doe')");
-            sql.execSQL("INSERT INTO students(first_name, last_name) VALUES ('Charbel', 'Daoud')");
+            newsdb.execSQL("CREATE Table IF NOT EXISTS news (title VARCHAR, author VARCHAR)");
+            newsdb.execSQL("INSERT INTO news(title, author) VALUES ('AA', 'AA')");
+            newsdb.execSQL("INSERT INTO news(title, author) VALUES ('BB', 'BB')");
 
-            // sql.execSQL("DELETE FROM students where first_name = 'John'");
-            //sql.execSQL("DELETE FROM students where first_name = 'Charbel'");
-            Cursor c = sql.rawQuery("Select * from students", null);
+            Cursor c = newsdb.rawQuery("Select * from news", null);
 
-            int fnameIndex = c.getColumnIndex("first_name");
-            int lnameIndex = c.getColumnIndex("last_name");
+            int title = c.getColumnIndex("title");
+            int author = c.getColumnIndex("author");
             c.moveToFirst();
 
             while(c!= null){
-                String name = c.getString(fnameIndex) + " " + c.getString(lnameIndex);
-                news.add(name);
+                String name = c.getString(title) + " by " + c.getString(author);
+                the_list.add(name);
+                Log.d("key4", "problem here");
                 c.moveToNext();
-                Log.d("key", "i go there");
-
             }
-            Log.d("i got out", "i go there");
-
-            Log.d("arrayyyy","AA" + String.valueOf(news));
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, news);
-            my_list.setAdapter(adapter);
-
+        //why cant we add code here?  (adapter)
         }catch(Exception e){
             e.printStackTrace();
         }
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, the_list);
+        my_list.setAdapter(adapter);
+        Log.d("key13", "out");
+
+
     }
 
-    public void populate(int x)
+    public void populate()
     {
-        Log.d("inside", "IM INSEDESAFR");
-        ArrayList<String> random_nums = new ArrayList<String>();
-        double random_value = 0;
-        for(int i =0; i <x; i++)
-        {
-            DecimalFormat formatter = new DecimalFormat(".##");
-            random_value = rand.nextDouble();
-            random_nums.add(formatter.format(random_value));
+        my_list = findViewById(R.id.my_list);
+        the_list = new ArrayList<String>();
+        //the_list = new ArrayList<String>(Arrays.asList("Mobile", "Web", "CP2"));
 
-        }
+        the_list.add("Mobile Computing");
+        the_list.add("CP1");
+        the_list.add("Web");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, random_nums);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, the_list);
+        //allow us to add them to the list view
         my_list.setAdapter(adapter);
+
+        //HELP
+
+        my_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedItem = (String) adapterView.getItemAtPosition(i);
+                Toast.makeText(getApplicationContext(), selectedItem, Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
 
