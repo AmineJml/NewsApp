@@ -21,14 +21,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
+import java.util.StringTokenizer;
 
 public class LandingActivity extends AppCompatActivity {
     String name;
     ListView my_list;
     Random rand;
     TextView user;
-
     //populate
+
     ArrayList<String> the_list;
     ArrayAdapter<String> adapter;
 
@@ -39,7 +40,11 @@ public class LandingActivity extends AppCompatActivity {
     SharedPreferences shared;
     SharedPreferences.Editor myEdit;
 
+    //list
     ArrayList<String> news;
+
+    //intent
+    Intent popUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +56,11 @@ public class LandingActivity extends AppCompatActivity {
         user = (TextView) findViewById(R.id.txtView_popUp_user) ;
 
         sharedPref();
-        populate();
+      //  populate();
      // populateTest();
-        //populateFinal();
+        populateFinal();
         //arL();
-        clickOnList();
+     //   clickOnList();
 
 
     }
@@ -68,12 +73,8 @@ public class LandingActivity extends AppCompatActivity {
                 selectedItem = (String) adapterView.getItemAtPosition(i);
                 popUp.putExtra("key", selectedItem + "we made it");
                 startActivity(popUp);
-
             }
-
         });
-
-
     }
 
     public void sharedPref()
@@ -82,20 +83,19 @@ public class LandingActivity extends AppCompatActivity {
         myEdit = shared.edit();
         name = shared.getString("token_a", "");
         user.setText("Welcome " + name);
-
     }
 
     public void populateFinal(){
 
         try{
-            //how to insert item only once
-            //how to select items by name
-            //cursor reexplanation
+            // how to insert item only once
+            // how to select items by name
+            // cursor reexplanation
 
-           // Date currentTime = Calendar.getInstance().getTime();
-         //   String current = String.valueOf(currentTime);
+            // Date currentTime = Calendar.getInstance().getTime();
+            // String current = String.valueOf(currentTime);
 
-          //  Log.d("timee", String.valueOf(currentTime));
+            // Log.d("timee", String.valueOf(currentTime));
             my_list = findViewById(R.id.my_list);
 
             the_list = new ArrayList<String>();
@@ -103,14 +103,10 @@ public class LandingActivity extends AppCompatActivity {
             String test = "publishedAtTest";
             SQLiteDatabase newsdb = this.openOrCreateDatabase("newsdb", MODE_PRIVATE, null);
             newsdb.execSQL("CREATE Table IF NOT EXISTS finaTestTable (ID INTEGER PRIMARY KEY AUTOINCREMENT,title VARCHAR, author VARCHAR, publishedAt VARCHAR, description VARCHAR)");
-
             newsdb.execSQL("INSERT INTO finaTestTable(title, author, publishedAt, description) VALUES ('Magician', 'abracadabra', test,'The best magic tricks in the worls starts with abracadabra' )");
-           // newsdb.execSQL("INSERT INTO finaTestTable(title, author, publishedAt, description) VALUES ('TUTUTU', 'train boy', ' 23 september', 'tututu is the fastest train in the world')");
-
-            //newsdb.execSQL("DELETE FROM finaTestTable where title = 'AA'");
-           // newsdb.execSQL("DELETE FROM finaTestTable where title = 'BB'");
-
-
+            // newsdb.execSQL("INSERT INTO finaTestTable(title, author, publishedAt, description) VALUES ('TUTUTU', 'train boy', ' 23 september', 'tututu is the fastest train in the world')");
+            //  newsdb.execSQL("DELETE FROM finaTestTable where title = 'AA'");
+            // newsdb.execSQL("DELETE FROM finaTestTable where title = 'BB'");
 
             Cursor c = newsdb.rawQuery("Select * from finaTestTable", null);
             int id = c.getColumnIndex("ID");
@@ -119,12 +115,11 @@ public class LandingActivity extends AppCompatActivity {
             int publishedAt = c.getColumnIndex("publishedAt");
 //---------------------------------------------------------------------------------------------
             c.moveToFirst();
-
             while(c!= null){
                 int i = c.getInt(id);
                 //Log.d("key1", String.valueOf(i));
 
-                String name = c.getString(title) + " by " + c.getString(author) + " " + c.getString(publishedAt) + " " + c.getInt(id) ;
+                String name =c.getInt(id) + '.' +  c.getString(title)  ;
                 the_list.add(name);
                 c.moveToNext();
             }
@@ -135,6 +130,15 @@ public class LandingActivity extends AppCompatActivity {
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, the_list);
         my_list.setAdapter(adapter);
+        Intent popUp = new Intent(this, popUpActivity.class);
+        my_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedItem = (String) adapterView.getItemAtPosition(i);
+                popUp.putExtra("key",  selectedItem);
+                startActivity(popUp);
+            }
+        });
 
     }
 
@@ -157,9 +161,7 @@ public class LandingActivity extends AppCompatActivity {
 
             int title = c.getColumnIndex("title");
             int author = c.getColumnIndex("author");
-
             c.moveToFirst();
-
             while(c!= null){
                 String name = c.getString(title) + " by " + c.getString(author) + " " ;
                 the_list.add(name);
@@ -170,10 +172,8 @@ public class LandingActivity extends AppCompatActivity {
         }catch(Exception e){
             e.printStackTrace();
         }
-
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, the_list);
         my_list.setAdapter(adapter);
-
     }
 
     public void populate()
