@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 public class LandingActivity extends AppCompatActivity {
@@ -49,8 +51,9 @@ public class LandingActivity extends AppCompatActivity {
         user = (TextView) findViewById(R.id.txtView_popUp_user) ;
 
         sharedPref();
-        //populate();
-      populateTest();
+        populate();
+     // populateTest();
+        //populateFinal();
         //arL();
         clickOnList();
 
@@ -82,6 +85,59 @@ public class LandingActivity extends AppCompatActivity {
 
     }
 
+    public void populateFinal(){
+
+        try{
+            //how to insert item only once
+            //how to select items by name
+            //cursor reexplanation
+
+           // Date currentTime = Calendar.getInstance().getTime();
+         //   String current = String.valueOf(currentTime);
+
+          //  Log.d("timee", String.valueOf(currentTime));
+            my_list = findViewById(R.id.my_list);
+
+            the_list = new ArrayList<String>();
+
+            String test = "publishedAtTest";
+            SQLiteDatabase newsdb = this.openOrCreateDatabase("newsdb", MODE_PRIVATE, null);
+            newsdb.execSQL("CREATE Table IF NOT EXISTS finaTestTable (ID INTEGER PRIMARY KEY AUTOINCREMENT,title VARCHAR, author VARCHAR, publishedAt VARCHAR, description VARCHAR)");
+
+            newsdb.execSQL("INSERT INTO finaTestTable(title, author, publishedAt, description) VALUES ('Magician', 'abracadabra', test,'The best magic tricks in the worls starts with abracadabra' )");
+           // newsdb.execSQL("INSERT INTO finaTestTable(title, author, publishedAt, description) VALUES ('TUTUTU', 'train boy', ' 23 september', 'tututu is the fastest train in the world')");
+
+            //newsdb.execSQL("DELETE FROM finaTestTable where title = 'AA'");
+           // newsdb.execSQL("DELETE FROM finaTestTable where title = 'BB'");
+
+
+
+            Cursor c = newsdb.rawQuery("Select * from finaTestTable", null);
+            int id = c.getColumnIndex("ID");
+            int title = c.getColumnIndex("title");
+            int author = c.getColumnIndex("author");
+            int publishedAt = c.getColumnIndex("publishedAt");
+//---------------------------------------------------------------------------------------------
+            c.moveToFirst();
+
+            while(c!= null){
+                int i = c.getInt(id);
+                //Log.d("key1", String.valueOf(i));
+
+                String name = c.getString(title) + " by " + c.getString(author) + " " + c.getString(publishedAt) + " " + c.getInt(id) ;
+                the_list.add(name);
+                c.moveToNext();
+            }
+            //why cant we add code here?  (adapter)
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, the_list);
+        my_list.setAdapter(adapter);
+
+    }
+
     public void populateTest()
     {
         try{
@@ -91,7 +147,6 @@ public class LandingActivity extends AppCompatActivity {
             my_list = findViewById(R.id.my_list);
 
             the_list = new ArrayList<String>();
-    Log.d("key1", "problem here");
             SQLiteDatabase newsdb = this.openOrCreateDatabase("newsdb", MODE_PRIVATE, null);
 
             newsdb.execSQL("CREATE Table IF NOT EXISTS news (title VARCHAR, author VARCHAR)");
@@ -102,10 +157,11 @@ public class LandingActivity extends AppCompatActivity {
 
             int title = c.getColumnIndex("title");
             int author = c.getColumnIndex("author");
+
             c.moveToFirst();
 
             while(c!= null){
-                String name = c.getString(title) + " by " + c.getString(author);
+                String name = c.getString(title) + " by " + c.getString(author) + " " ;
                 the_list.add(name);
                 Log.d("key4", "problem here");
                 c.moveToNext();
@@ -117,8 +173,6 @@ public class LandingActivity extends AppCompatActivity {
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, the_list);
         my_list.setAdapter(adapter);
-        Log.d("key13", "out");
-
 
     }
 
