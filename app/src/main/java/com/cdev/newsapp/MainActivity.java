@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
             //addign token_a to the sahred pref
             myEdit.putString("token_a", str_name);
             myEdit.commit();
-            String token = shared.getString("token_a", "");
          //  Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
 
 

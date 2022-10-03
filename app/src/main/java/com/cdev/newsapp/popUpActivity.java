@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,5 +46,9 @@ public class popUpActivity extends AppCompatActivity {
         name = shared.getString("token_a", "");
         user.setText("Welcome " + name);
 
+    }
+    public void newArticle(View v) {
+        Intent addNewArtile = new Intent(this, AddNewArticle.class);
+        startActivity(addNewArtile);
     }
 }

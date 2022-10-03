@@ -6,4 +6,65 @@
     android:layout_height="match_parent"
     tools:context=".AddNewArticle">
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editText4"
+        android:layout_width="410dp"
+        android:layout_height="543dp"
+        android:hint="description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editText3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Title"
+        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        tools:layout_editor_absoluteX="3dp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="PublishedAt"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+        tools:layout_editor_absoluteX="-3dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/txtView_popUp_user2"
+        android:layout_width="416dp"
+        android:layout_height="71dp"
+        android:background="#C6303E97"
+        android:lineSpacingExtra="8sp"
+        android:text="SIu"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout2"
+        android:layout_width="413dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/txtView_popUp_user2"
+        tools:layout_editor_absoluteX="1dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Author" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -65,6 +65,11 @@ public class LandingActivity extends AppCompatActivity {
 
     }
 
+    public void newArticle(View v) {
+            Intent addNewArtile = new Intent(this, AddNewArticle.class);
+            startActivity(addNewArtile);
+    }
+
     public void clickOnList(){
         Intent popUp = new Intent(this, popUpActivity.class);
         my_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
